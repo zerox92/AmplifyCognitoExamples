@@ -3,32 +3,10 @@ import './App.css';
 import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import { Auth, Hub} from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 window.LOG_LEVEL = 'DEBUG';
-
-Amplify.configure({
-  Auth: {
-      // only for Federated Authentication - Amazon Cognito Identity Pool ID
-      identityPoolId: '',
-      // - Amazon Cognito Region
-      region: '',
-      // - Amazon Cognito User Pool ID
-      userPoolId: '',
-      // - Amazon Cognito Web Client ID (26-char alphanumeric string)
-      userPoolWebClientId: '',
-      // - Enforce user authentication prior to accessing AWS resources or not
-      mandatorySignIn: false,
-
-  // OPTIONAL - Hosted UI configuration
-    oauth: {
-    domain: '',
-    scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-    redirectSignIn: '',
-    redirectSignOut: '',
-    responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
-    }
-  }
-});
 
 class App extends React.Component {
 
