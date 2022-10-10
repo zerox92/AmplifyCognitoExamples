@@ -151,8 +151,9 @@ class SignIn extends React.Component {
   async handleSignIn(){
      try {
     // Test Data
-    var username = "ticker"
-    var password = "Ticker123!@£"
+    var username = document.getElementById("Username").value;
+    var password = document.getElementById("Password").value;
+       
         const user = await Auth.signIn(username, password);
         if (user.challengeName === 'SMS_MFA' ||
             user.challengeName === 'SOFTWARE_TOKEN_MFA') {
@@ -188,6 +189,8 @@ class SignIn extends React.Component {
         } else {
             // The user directly signs in
             console.log(user);
+            document.getElementById("Username").value = "";
+            document.getElementById("Password").value = "";
         }
     } catch (err) {
         if (err.code === 'UserNotConfirmedException') {
@@ -212,6 +215,8 @@ class SignIn extends React.Component {
     return (
     <div className="Amplify-component">
       <h4>Sign In as testUser</h4>
+      <input type="text" placeholder="Username" id="Username"/>
+      <input type="text" placeholder="Password" id="Password" />
       <button onClick={this.handleSignIn}>Sign In</button>
     </div>
     );
