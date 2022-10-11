@@ -13,7 +13,7 @@ Usage:
 [New components added]
 ![APP UI](UI.jpg?raw=true "Title")
 
-To use the Cognito react HOC instead, uncomment line 72 in App.js and comment out line 73:
+To use the Cognito react HOC instead, uncomment line 54 in App.js and comment out line 55:
 Example:
  ~~~
 export default withAuthenticator(App, false);
