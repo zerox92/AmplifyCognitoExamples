@@ -46,6 +46,7 @@ class App extends React.Component {
         <CurrentUserCredentials/>
         <CurrentCredentials/>
         <SocialLogins/>
+        <AppSyncApi/>
       </div>
     );
   }
@@ -153,7 +154,7 @@ class SignIn extends React.Component {
     // Test Data
     var username = document.getElementById("Username").value;
     var password = document.getElementById("Password").value;
-       
+
         const user = await Auth.signIn(username, password);
         if (user.challengeName === 'SMS_MFA' ||
             user.challengeName === 'SOFTWARE_TOKEN_MFA') {
@@ -277,25 +278,25 @@ class SocialLogins extends React.Component {
   }
 
   googleLogin() {
-    Auth.federatedSignIn({provider: 'Google'}).then(() => 
+    Auth.federatedSignIn({provider: 'Google'}).then(() =>
       Auth.currentSession()
     )
   }
 
   facebookLogin() {
-    Auth.federatedSignIn({provider: 'Facebook'}).then(() => 
+    Auth.federatedSignIn({provider: 'Facebook'}).then(() =>
       Auth.currentSession()
     )
   }
 
   appleLogin() {
-    Auth.federatedSignIn({provider: 'SignInWithApple'}).then(() => 
+    Auth.federatedSignIn({provider: 'SignInWithApple'}).then(() =>
       Auth.currentSession()
     )
   }
 
   amazonLogin() {
-    Auth.federatedSignIn({provider: 'LoginWithAmazon'}).then(() => 
+    Auth.federatedSignIn({provider: 'LoginWithAmazon'}).then(() =>
       Auth.currentSession()
     )
   }
@@ -312,6 +313,26 @@ class SocialLogins extends React.Component {
     );
   }
 }
+
+class AppSyncApi extends React.Component {
+  constructor(props) {
+    super(props);
+    this.listTodos = this.listTodos.bind(this);
+  }
+  listTodos(){
+
+  }
+
+  render() {
+    return (
+    <div className="Amplify-component">
+      <h4>AppSync API</h4>
+      <button onClick={this.listTodos}>List Todos</button>
+    </div>
+    );
+  }
+}
+
 //////
 
 // New Component
