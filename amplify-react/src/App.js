@@ -2,7 +2,10 @@ import React from 'react';
 import './App.css';
 import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
-import { Auth, Hub} from 'aws-amplify';
+import { Auth, Hub, API, graphqlOperation} from 'aws-amplify';
+// import { listTodos } from './graphql/queries';
+import * as queries from './graphql/queries';
+import * as mutations from './graphql/mutations';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
@@ -319,8 +322,23 @@ class AppSyncApi extends React.Component {
     super(props);
     this.listTodos = this.listTodos.bind(this);
   }
-  listTodos(){
+  async listTodos(){
+    // const todos = await API.graphql(graphqlOperation(listTodos));
+    const todos = await API.graphql({
+      query: queries.listTodos,
+      authMode: 'API_KEY'
+    });
+    console.log(todos);
+  }
 
+  async creatTodo() {
+    const todoDetails = { name: "My first todo", description: "Hello world!" };
+    const todo = await API.graphql({
+      query: mutations.createTodo,
+      variables: {input: todoDetails},
+      authMode: 'API_KEY'
+    });
+    console.log(todo);
   }
 
   render() {
@@ -328,6 +346,7 @@ class AppSyncApi extends React.Component {
     <div className="Amplify-component">
       <h4>AppSync API</h4>
       <button onClick={this.listTodos}>List Todos</button>
+      <button onClick={this.creatTodo}>Create Todo</button>
     </div>
     );
   }
