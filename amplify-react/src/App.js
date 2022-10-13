@@ -336,7 +336,7 @@ class AppSyncApi extends React.Component {
     const todo = await API.graphql({
       query: mutations.createTodo,
       variables: {input: todoDetails},
-      authMode: 'API_KEY'
+      authMode: 'AWS_IAM'
     });
     console.log(todo);
   }
