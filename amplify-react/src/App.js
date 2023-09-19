@@ -42,12 +42,12 @@ class App extends React.Component {
           </p>
         </header>
         <SignIn/>
-        <OauthSignIn/>
         <SignOut/>
         <CurrentAuthenticatedUser/>
         <RetrieveCurrentSession/>
         <CurrentUserCredentials/>
         <CurrentCredentials/>
+        <OauthSignIn/>
         <SocialLogins/>
         <AppSyncApi/>
       </div>
